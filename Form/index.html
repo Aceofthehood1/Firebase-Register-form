@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="top">Registration Form</h1>
+    <form id="login-form" action="index.html" method="POST">
+        <div>
+            <label for="fname">First Name</label><input class="login-form" type="text" id="fname"> 
+        </div>
+        <div>
+            <label for="sname">Surname</label><input class="login-form" type="text" id="sname">
+        </div>
+        <div>
+            <label for="age">Age</label><input class="login-form" type="text" id="age">
+        </div>
+        <div>
+            <label for="email">Email Address</label><input class="login-form" type="text" id="email">
+        </div>
+        <div>
+            <label for="password">Password</label><input class="login-form" type="password" id="password">
+        </div>
+        <button type="submit" name="submit" id="submit">Submit</button>
+    </form>
+   <script src="https://www.gstatic.com/firebasejs/9.7.0/firebase-firestore.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js"></script>
+</body>
+</html>
