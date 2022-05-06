@@ -8,63 +8,57 @@ const firebaseConfig = {
     appId: "1:662720821061:web:7f98fdd217bc0664f2302c"
   };
 
-  //initialize firebase
+  //initialize firebas
   firebase.initializeApp(firebaseConfig);
+
+let firestore_db = firebase.database().ref('Registration');
+
+// Function to get get form values
+function getInputVal(id) {
+    return document.getElementById(id).value;
+}
+
+// Save message to firebase
+function saveMessage(fname, sname, age, email, password) {
 /*
-  //reference database
-  let registerFormDB = firebase.database().ref('RegisterForm');
-  document.getElementById('login-form').addEventListener('submit',submitForm);
-
-  function submitForm(e){
-      e.preventDefault();
-      let fname    = getElementVal('fname');
-      let sname    = getElementVal('sname');
-      let age      = getElementVal('age');
-      let email    = getElementVal('email');
-      let password = getElementVal('password');
-
-      console.log(fname,sname,age,email,password);
-  }
-
-  const getElementVal = (id) => {
-      return document.getElementById(id).value;
-  } */
-
-  var push_to_firebase = function(data){
-    alert("Thanks for sending a message. I'll try and get back to you as soon as possible.")
-    const db = getFirestore(app);
-
-    db.collection("Register").add({
-        fname: data["fname"],
-        sname: data["sname"],
-        age  : data["age"],
-        email: data["email"],
-        password: data["password"]
-    }).then(function(docRef) {
-        console.log("Message sent, ID: ", docRef.id);
-        location.reload();
-    })
-    .catch(function(error) {
-        console.error("Message could not be sent: ", error);
+  let testRef = firebase.firestore().collection('Register').doc();
+  testRef.set({
+      fname: fname,
+      sname: sname,
+      age: age,
+      email: email,
+      password: password
+  });
+*/
+  let newMessageRef = firestore_db.push();
+    newMessageRef.set({
+        fname: fname,
+        sname: sname,
+        age: age,
+        email: email,
+        password: password
     });
-  }
 
-  var contact_submit = function(){
-    var fname = document.getElementById("fname");
-    var sname = document.getElementById("sname");
-    var age = document.getElementById("age");
-    var email = document.getElementById("email");
-    var password = document.getElementById("password");
+  console.log(fname, sname, age, email, password);
+}
 
-    var data = {
-      "fname" : fname.value,
-      "sname" : sname.value,
-      "age"   : age.value,
-      "email" : email.value,
-      "password"  : password.value
-    }
-    push_to_firebase(data);
 
-  }
+function submitForm() {
+    //e.preventDefault();
 
-  document.getElementById("submit").addEventListener("click", contact_submit);
+    // Get values
+    let fname = getInputVal('fname');
+    let sname = getInputVal('sname');
+    let age = getInputVal('age');
+    let email = getInputVal('email');
+    let password = getInputVal('password');
+
+    // Save the message 
+    saveMessage(fname, sname, age, email, password);
+
+    // Reset the form
+    //document.getElementById('login-form').reset();
+}
+
+
+document.getElementById('login-form').addEventListener("submit", submitForm);
